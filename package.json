@@ -37,7 +37,7 @@
     "react-dom": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@docusaurus/core": "^2.4.0",
+    "@docusaurus/core": "^3.9.2",
     "@docusaurus/types": "^2.4.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
