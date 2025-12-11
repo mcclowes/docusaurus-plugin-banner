@@ -30,6 +30,18 @@ export type BannerPluginOptions = {
   showCloseIcon?: boolean
   
   /**
+   * Link color within the banner content
+   * @default '#ffffff'
+   */
+  linkColor?: string
+
+  /**
+   * Whether to underline links
+   * @default true
+   */
+  linkUnderline?: boolean
+
+  /**
    * Custom CSS class name for the banner
    */
   className?: string

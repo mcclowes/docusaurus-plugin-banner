@@ -11,6 +11,8 @@ export default function bannerPlugin(
     backgroundColor: options.backgroundColor ?? '#3b82f6',
     textColor: options.textColor ?? '#ffffff',
     showCloseIcon: options.showCloseIcon ?? true,
+    linkColor: options.linkColor ?? '#ffffff',
+    linkUnderline: options.linkUnderline ?? true,
     className: options.className,
     storageKey: options.storageKey ?? 'docusaurus-banner-dismissed',
     id: options.id,

@@ -43,9 +43,14 @@ function initBanner() {
   // Create container for the banner
   const container = document.createElement('div')
   container.id = 'docusaurus-plugin-banner-container'
-  
-  // Insert at the beginning of body
-  document.body.insertBefore(container, document.body.firstChild)
+
+  // Insert before the navbar wrapper (or at beginning of body as fallback)
+  const navbarWrapper = document.querySelector('.navbar-sidebar-wrapper, .navbar')?.parentElement
+  if (navbarWrapper) {
+    navbarWrapper.insertBefore(container, navbarWrapper.firstChild)
+  } else {
+    document.body.insertBefore(container, document.body.firstChild)
+  }
 
   // Create React root and render banner
   bannerRoot = createRoot(container)

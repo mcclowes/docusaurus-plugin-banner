@@ -6,6 +6,8 @@ interface BannerProps {
   backgroundColor: string
   textColor: string
   showCloseIcon: boolean
+  linkColor: string
+  linkUnderline: boolean
   className?: string
   storageKey: string
   id?: string
@@ -17,6 +19,8 @@ export default function Banner({
   backgroundColor,
   textColor,
   showCloseIcon,
+  linkColor,
+  linkUnderline,
   className,
   storageKey,
   id,
@@ -53,22 +57,29 @@ export default function Banner({
 
   if (!isVisible) return null
 
+  const bannerId = `docusaurus-banner-${id || 'default'}`
+
+  const linkStyles = `
+    #${bannerId} a {
+      color: ${linkColor};
+      text-decoration: ${linkUnderline ? 'underline' : 'none'};
+    }
+    #${bannerId} a:hover {
+      opacity: 0.8;
+    }
+  `
+
   const bannerStyle: React.CSSProperties = {
     backgroundColor,
     color: textColor,
     padding: '12px 16px',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1000,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+    transition: 'opacity 0.3s ease-out, max-height 0.3s ease-out',
     opacity: isAnimating ? 0 : 1,
-    transform: isAnimating ? 'translateY(-100%)' : 'translateY(0)',
+    maxHeight: isAnimating ? 0 : '100px',
+    overflow: 'hidden',
   }
 
   const contentStyle: React.CSSProperties = {
@@ -94,12 +105,14 @@ export default function Banner({
   }
 
   return (
-    <div 
-      style={bannerStyle} 
+    <div
+      id={bannerId}
+      style={bannerStyle}
       className={className}
       role="banner"
       aria-label="Site banner"
     >
+      <style>{linkStyles}</style>
       <div 
         style={contentStyle}
         dangerouslySetInnerHTML={{ __html: content }}
@@ -119,5 +132,3 @@ export default function Banner({
     </div>
   )
 }
-
-
