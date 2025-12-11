@@ -1,13 +1,29 @@
 import React from 'react'
 import { createRoot, Root } from 'react-dom/client'
+import useGlobalData from '@docusaurus/useGlobalData'
 import Banner from './Banner'
 
 let bannerRoot: Root | null = null
 
+function BannerWrapper() {
+  const globalData = useGlobalData()
+  const bannerData = globalData['docusaurus-plugin-banner']?.default as any
+
+  if (!bannerData) return null
+
+  return <Banner {...bannerData} />
+}
+
 function initBanner() {
   if (typeof window === 'undefined') return
   
-  // Clear existing banner if present
+  // Clean up existing banner root if present
+  if (bannerRoot) {
+    bannerRoot.unmount()
+    bannerRoot = null
+  }
+  
+  // Clear existing banner container if present
   const existingBanner = document.getElementById('docusaurus-plugin-banner-container')
   if (existingBanner) {
     existingBanner.remove()
@@ -20,15 +36,9 @@ function initBanner() {
   // Insert at the beginning of body
   document.body.insertBefore(container, document.body.firstChild)
 
-  // Create React root and render banner
+  // Create React root and render banner wrapper
   bannerRoot = createRoot(container)
-  
-  // Get banner data from window global data
-  const bannerData = (window as any).docusaurus?.globalData?.['docusaurus-plugin-banner']?.default
-  
-  if (!bannerData) return
-  
-  bannerRoot.render(React.createElement(Banner, bannerData))
+  bannerRoot.render(<BannerWrapper />)
 }
 
 // Initialize banner when the route is ready

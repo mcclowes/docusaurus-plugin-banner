@@ -1,6 +1,6 @@
 # Docusaurus Plugin Banner
 
-A customizable, dismissable banner plugin for Docusaurus v2 sites with localStorage persistence.
+A customizable, dismissable banner plugin for Docusaurus v3 sites with localStorage persistence.
 
 ## Features
 

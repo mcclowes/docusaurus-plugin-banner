@@ -1,26 +1,44 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-// @ts-ignore - Docusaurus v2 doesn't export this from the package root
-import useDocusaurusContext from '@docusaurus/core/lib/client/exports/useDocusaurusContext'
+import { createRoot, Root } from 'react-dom/client'
 import Banner from './Banner'
 
-function BannerWrapper() {
-  const { globalData } = useDocusaurusContext()
-  const bannerData = globalData['docusaurus-plugin-banner']?.default as any
-
-  if (!bannerData) return null
-
-  return <Banner {...bannerData} />
-}
+let bannerRoot: Root | null = null
 
 function initBanner() {
   if (typeof window === 'undefined') return
   
-  // Clear existing banner if present
+  // Clean up existing banner root if present
+  if (bannerRoot) {
+    bannerRoot.unmount()
+    bannerRoot = null
+  }
+  
+  // Clear existing banner container if present
   const existingBanner = document.getElementById('docusaurus-plugin-banner-container')
   if (existingBanner) {
     existingBanner.remove()
   }
+
+  // Get banner data from global data (Docusaurus v3)
+  // Try accessing via window first, then fallback to generated module if available
+  let bannerData = 
+    (window as any).__docusaurus?.globalData?.['docusaurus-plugin-banner']?.default ||
+    (window as any).docusaurus?.globalData?.['docusaurus-plugin-banner']?.default
+  
+  // If not found, try to import from generated module (this will work at runtime)
+  if (!bannerData && typeof window !== 'undefined') {
+    try {
+      // Dynamic import of generated globalData - only works after Docusaurus has loaded
+      const globalDataModule = (window as any).__docusaurus_internal?.globalData
+      if (globalDataModule) {
+        bannerData = globalDataModule['docusaurus-plugin-banner']?.default
+      }
+    } catch {
+      // Ignore errors - globalData might not be available yet
+    }
+  }
+  
+  if (!bannerData) return
 
   // Create container for the banner
   const container = document.createElement('div')
@@ -30,7 +48,8 @@ function initBanner() {
   document.body.insertBefore(container, document.body.firstChild)
 
   // Create React root and render banner
-  ReactDOM.render(<BannerWrapper />, container)
+  bannerRoot = createRoot(container)
+  bannerRoot.render(<Banner {...bannerData} />)
 }
 
 // Initialize banner when the route is ready
