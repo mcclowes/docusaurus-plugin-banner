@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+coverage/
+.docusaurus/
+examples/**/node_modules/
+examples/**/.docusaurus/
+examples/**/build/
+*.tgz
+package-lock.json

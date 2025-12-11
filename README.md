@@ -50,6 +50,8 @@ module.exports = {
 | `backgroundColor` | `string` | `'#3b82f6'` | Background color of the banner. |
 | `textColor` | `string` | `'#ffffff'` | Text color of the banner. |
 | `showCloseIcon` | `boolean` | `true` | Whether to show the close (×) button. Only shown if `dismissible` is true. |
+| `linkColor` | `string` | `'#ffffff'` | Color for links within the banner content. |
+| `linkUnderline` | `boolean` | `true` | Whether to underline links. |
 | `className` | `string` | - | Custom CSS class for the banner. |
 | `storageKey` | `string` | `'docusaurus-banner-dismissed'` | localStorage key for persisting dismissal state. |
 | `id` | `string` | - | Unique ID for the banner. Useful when multiple banners are needed. |
@@ -84,7 +86,7 @@ plugins: [
 ]
 ```
 
-### HTML Content
+### HTML Content with Link Styling
 
 ```js
 plugins: [
@@ -94,6 +96,8 @@ plugins: [
       content: '<strong>Alert:</strong> Learn more about our <a href="/blog/2024/01/01/update">latest update</a>!',
       dismissible: true,
       backgroundColor: '#ef4444',
+      linkColor: '#fef08a',
+      linkUnderline: true,
     }
   ]
 ]
@@ -155,7 +159,7 @@ plugins: [
 
 ## How It Works
 
-The banner appears at the very top of your Docusaurus site with a fixed position. When dismissed:
+The banner appears at the very top of your Docusaurus site, above the navbar. When dismissed:
 
 1. The banner animates out smoothly
 2. The dismissal state is saved to localStorage
@@ -195,6 +199,49 @@ npm run typecheck
 npm run clean
 ```
 
+### Testing
+
+```bash
+# Run unit tests
+npm test
+
+# Run unit tests in watch mode
+npm run test:watch
+
+# Run unit tests with coverage
+npm run test:coverage
+
+# Run e2e tests (requires building example site first)
+npm run example:build
+npm run test:e2e
+
+# Run e2e tests with UI
+npm run test:e2e:ui
+```
+
+### Example Site
+
+```bash
+# Start example site in development mode
+npm run example:start
+
+# Build example site
+npm run example:build
+
+# Serve built example site
+npm run example:serve
+```
+
+### Code Formatting
+
+```bash
+# Format code
+npm run format
+
+# Check formatting
+npm run format:check
+```
+
 ### Testing Locally
 
 Link the plugin into your Docusaurus site:
@@ -207,11 +254,15 @@ npm pack
 npm install ../path/to/docusaurus-plugin-banner-*.tgz
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
+
 ## Browser Support
 
 Works in all modern browsers that support:
 - ES2019
-- React 17+
+- React 18+
 - localStorage API
 
 ## License
