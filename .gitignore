@@ -52,3 +52,7 @@ tmp/
 temp/
 
 .docusaurus/
+
+# Claude
+.claude/worktrees/
+.claude/scheduled_tasks.lock
