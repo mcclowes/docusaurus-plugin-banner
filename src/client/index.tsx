@@ -6,13 +6,13 @@ let bannerRoot: Root | null = null
 
 function initBanner() {
   if (typeof window === 'undefined') return
-  
+
   // Clean up existing banner root if present
   if (bannerRoot) {
     bannerRoot.unmount()
     bannerRoot = null
   }
-  
+
   // Clear existing banner container if present
   const existingBanner = document.getElementById('docusaurus-plugin-banner-container')
   if (existingBanner) {
@@ -21,10 +21,10 @@ function initBanner() {
 
   // Get banner data from global data (Docusaurus v3)
   // Try accessing via window first, then fallback to generated module if available
-  let bannerData = 
+  let bannerData =
     (window as any).__docusaurus?.globalData?.['docusaurus-plugin-banner']?.default ||
     (window as any).docusaurus?.globalData?.['docusaurus-plugin-banner']?.default
-  
+
   // If not found, try to import from generated module (this will work at runtime)
   if (!bannerData && typeof window !== 'undefined') {
     try {
@@ -37,7 +37,7 @@ function initBanner() {
       // Ignore errors - globalData might not be available yet
     }
   }
-  
+
   if (!bannerData) return
 
   // Create container for the banner

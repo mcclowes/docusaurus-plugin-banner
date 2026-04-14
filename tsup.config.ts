@@ -24,4 +24,3 @@ export default defineConfig({
   noExternal: [],
   treeshake: true,
 })
-

@@ -35,26 +35,26 @@ module.exports = {
         dismissible: true,
         backgroundColor: '#3b82f6',
         textColor: '#ffffff',
-      }
-    ]
-  ]
+      },
+    ],
+  ],
 }
 ```
 
 ### Options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `content` | `string` | **required** | Banner content. Can be plain text or HTML. |
-| `dismissible` | `boolean` | `true` | Whether users can dismiss the banner. |
-| `backgroundColor` | `string` | `'#3b82f6'` | Background color of the banner. |
-| `textColor` | `string` | `'#ffffff'` | Text color of the banner. |
-| `showCloseIcon` | `boolean` | `true` | Whether to show the close (×) button. Only shown if `dismissible` is true. |
-| `linkColor` | `string` | `'#ffffff'` | Color for links within the banner content. |
-| `linkUnderline` | `boolean` | `true` | Whether to underline links. |
-| `className` | `string` | - | Custom CSS class for the banner. |
-| `storageKey` | `string` | `'docusaurus-banner-dismissed'` | localStorage key for persisting dismissal state. |
-| `id` | `string` | - | Unique ID for the banner. Useful when multiple banners are needed. |
+| Option            | Type      | Default                         | Description                                                                |
+| ----------------- | --------- | ------------------------------- | -------------------------------------------------------------------------- |
+| `content`         | `string`  | **required**                    | Banner content. Can be plain text or HTML.                                 |
+| `dismissible`     | `boolean` | `true`                          | Whether users can dismiss the banner.                                      |
+| `backgroundColor` | `string`  | `'#3b82f6'`                     | Background color of the banner.                                            |
+| `textColor`       | `string`  | `'#ffffff'`                     | Text color of the banner.                                                  |
+| `showCloseIcon`   | `boolean` | `true`                          | Whether to show the close (×) button. Only shown if `dismissible` is true. |
+| `linkColor`       | `string`  | `'#ffffff'`                     | Color for links within the banner content.                                 |
+| `linkUnderline`   | `boolean` | `true`                          | Whether to underline links.                                                |
+| `className`       | `string`  | -                               | Custom CSS class for the banner.                                           |
+| `storageKey`      | `string`  | `'docusaurus-banner-dismissed'` | localStorage key for persisting dismissal state.                           |
+| `id`              | `string`  | -                               | Unique ID for the banner. Useful when multiple banners are needed.         |
 
 ## Examples
 
@@ -67,8 +67,8 @@ plugins: [
     {
       content: 'Check out our new features!',
       dismissible: true,
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -81,8 +81,8 @@ plugins: [
     {
       content: 'Important announcement: Maintenance scheduled for Friday.',
       dismissible: false,
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -93,13 +93,14 @@ plugins: [
   [
     'docusaurus-plugin-banner',
     {
-      content: '<strong>Alert:</strong> Learn more about our <a href="/blog/2024/01/01/update">latest update</a>!',
+      content:
+        '<strong>Alert:</strong> Learn more about our <a href="/blog/2024/01/01/update">latest update</a>!',
       dismissible: true,
       backgroundColor: '#ef4444',
       linkColor: '#fef08a',
       linkUnderline: true,
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -113,7 +114,7 @@ plugins: [
       id: 'welcome',
       content: 'Welcome to our docs!',
       dismissible: true,
-    }
+    },
   ],
   [
     'docusaurus-plugin-banner',
@@ -122,8 +123,8 @@ plugins: [
       content: 'Subscribe to our newsletter',
       dismissible: true,
       backgroundColor: '#10b981',
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -138,8 +139,8 @@ plugins: [
       backgroundColor: '#8b5cf6',
       textColor: '#f3f4f6',
       className: 'my-custom-banner',
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -152,8 +153,8 @@ plugins: [
     {
       content: 'Special announcement',
       storageKey: 'special-announcement-dismissed',
-    }
-  ]
+    },
+  ],
 ]
 ```
 
@@ -261,6 +262,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 ## Browser Support
 
 Works in all modern browsers that support:
+
 - ES2019
 - React 18+
 - localStorage API

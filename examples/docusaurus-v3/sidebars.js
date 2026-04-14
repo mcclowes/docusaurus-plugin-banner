@@ -1,5 +1,3 @@
 export default {
-  docs: [
-    'intro',
-  ],
+  docs: ['intro'],
 }

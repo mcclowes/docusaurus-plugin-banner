@@ -51,9 +51,7 @@ export default {
     ({
       navbar: {
         title: 'Banner Example',
-        items: [
-          { to: '/docs/intro', label: 'Docs', position: 'left' },
-        ],
+        items: [{ to: '/docs/intro', label: 'Docs', position: 'left' }],
       },
     }),
 }

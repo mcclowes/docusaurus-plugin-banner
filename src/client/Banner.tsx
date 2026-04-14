@@ -42,11 +42,11 @@ export default function Banner({
 
     // Animate out
     setIsAnimating(true)
-    
+
     setTimeout(() => {
       setIsVisible(false)
       setIsAnimating(false)
-      
+
       // Store dismissal state
       if (typeof window !== 'undefined') {
         const dismissedKey = id ? `${storageKey}-${id}` : storageKey
@@ -113,18 +113,15 @@ export default function Banner({
       aria-label="Site banner"
     >
       <style>{linkStyles}</style>
-      <div 
-        style={contentStyle}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      <div style={contentStyle} dangerouslySetInnerHTML={{ __html: content }} />
       {dismissible && showCloseIcon && (
         <button
           type="button"
           aria-label="Dismiss banner"
           onClick={handleDismiss}
           style={closeButtonStyle}
-          onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-          onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}
+          onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+          onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.8')}
         >
           ×
         </button>

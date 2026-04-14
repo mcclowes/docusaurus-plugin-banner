@@ -26,8 +26,8 @@ test.describe('Banner Plugin', () => {
       await expect(banner).toBeVisible()
 
       // Check background color
-      const backgroundColor = await banner.evaluate((el) =>
-        window.getComputedStyle(el).backgroundColor
+      const backgroundColor = await banner.evaluate(
+        (el) => window.getComputedStyle(el).backgroundColor
       )
       // #3b82f6 = rgb(59, 130, 246)
       expect(backgroundColor).toBe('rgb(59, 130, 246)')
@@ -40,9 +40,7 @@ test.describe('Banner Plugin', () => {
       await expect(banner).toBeVisible()
 
       // Check text color
-      const color = await banner.evaluate((el) =>
-        window.getComputedStyle(el).color
-      )
+      const color = await banner.evaluate((el) => window.getComputedStyle(el).color)
       // #ffffff = rgb(255, 255, 255)
       expect(color).toBe('rgb(255, 255, 255)')
     })
