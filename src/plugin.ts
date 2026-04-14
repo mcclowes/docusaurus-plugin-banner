@@ -32,9 +32,7 @@ function validateOptions(options: BannerPluginOptions): void {
   for (const field of stringFields) {
     const value = options[field]
     if (value !== undefined && typeof value !== 'string') {
-      throw new Error(
-        `[docusaurus-plugin-banner] \`${field}\` must be a string when provided`
-      )
+      throw new Error(`[docusaurus-plugin-banner] \`${field}\` must be a string when provided`)
     }
   }
   const boolFields: Array<keyof BannerPluginOptions> = [
@@ -45,9 +43,7 @@ function validateOptions(options: BannerPluginOptions): void {
   for (const field of boolFields) {
     const value = options[field]
     if (value !== undefined && typeof value !== 'boolean') {
-      throw new Error(
-        `[docusaurus-plugin-banner] \`${field}\` must be a boolean when provided`
-      )
+      throw new Error(`[docusaurus-plugin-banner] \`${field}\` must be a boolean when provided`)
     }
   }
 }

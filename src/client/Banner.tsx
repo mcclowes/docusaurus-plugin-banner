@@ -37,7 +37,11 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-function buildDismissedKey(storageKey: string, id: string | undefined, version: string | undefined): string {
+function buildDismissedKey(
+  storageKey: string,
+  id: string | undefined,
+  version: string | undefined
+): string {
   // Preserve the legacy `${storageKey}-${id}` format when no version is given so
   // that existing dismissals survive an upgrade. A `version` bump deliberately
   // invalidates prior dismissals.
