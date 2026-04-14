@@ -1,4 +1,4 @@
-import React from 'react'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import Banner from '../src/client/Banner'
 
@@ -158,6 +158,52 @@ describe('Banner', () => {
       render(<Banner {...defaultProps} id="my-banner" />)
 
       expect(screen.queryByRole('banner')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('version-based invalidation', () => {
+    it('should re-show banner when version changes even if previously dismissed', () => {
+      localStorageMock.setItem('test-banner-dismissed', 'true')
+
+      render(<Banner {...defaultProps} version="v2" />)
+
+      expect(screen.getByRole('banner')).toBeInTheDocument()
+    })
+
+    it('should stay dismissed across re-renders with the same version', () => {
+      localStorageMock.setItem('test-banner-dismissed::v=v2', 'true')
+
+      render(<Banner {...defaultProps} version="v2" />)
+
+      expect(screen.queryByRole('banner')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('localStorage safety', () => {
+    it('should persist dismissal synchronously on click (before animation completes)', () => {
+      render(<Banner {...defaultProps} />)
+
+      const dismissButton = screen.getByRole('button', { name: 'Dismiss banner' })
+      fireEvent.click(dismissButton)
+
+      expect(localStorageMock.getItem('test-banner-dismissed')).toBe('true')
+    })
+
+    it('should not crash when localStorage.getItem throws', () => {
+      const originalGetItem = window.localStorage.getItem
+      Object.defineProperty(window.localStorage, 'getItem', {
+        value: () => {
+          throw new Error('SecurityError')
+        },
+        configurable: true,
+      })
+
+      expect(() => render(<Banner {...defaultProps} />)).not.toThrow()
+
+      Object.defineProperty(window.localStorage, 'getItem', {
+        value: originalGetItem,
+        configurable: true,
+      })
     })
   })
 
