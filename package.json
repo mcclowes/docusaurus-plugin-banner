@@ -42,6 +42,7 @@
     "example:clear": "npm --prefix examples/docusaurus-v3 run clear",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "prepare": "husky",
     "prepublishOnly": "npm run build && npm test"
   },
   "peerDependencies": {
@@ -62,7 +63,9 @@
     "eslint": "^9.15.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^15.5.1",
     "prettier": "^3.2.0",
     "rimraf": "^6.0.1",
     "tsup": "^8.0.1",
@@ -90,5 +93,14 @@
   "homepage": "https://github.com/mcclowes/docusaurus-plugin-banner#readme",
   "engines": {
     "node": ">=18.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
   }
 }
