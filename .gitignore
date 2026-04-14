@@ -16,6 +16,7 @@ lib/
 # Testing
 coverage/
 .nyc_output/
+*.profraw
 
 # Jest
 .jest-cache/
