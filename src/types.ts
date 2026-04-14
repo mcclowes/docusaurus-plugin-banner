@@ -6,7 +6,11 @@ export type BannerPluginOptions = {
   dismissible?: boolean
 
   /**
-   * Banner content to display. Can be plain text or HTML string
+   * Banner content to display. Can be plain text or HTML string.
+   *
+   * SECURITY: This value is injected via `dangerouslySetInnerHTML`. Only pass
+   * trusted content. If the content originates from user input, a CMS, or any
+   * other untrusted source, sanitize it before passing it to the plugin.
    */
   content: string
 
@@ -56,4 +60,11 @@ export type BannerPluginOptions = {
    * ID for the banner - useful when multiple banners are needed
    */
   id?: string
+
+  /**
+   * Version string appended to the dismissal storage key. Bump this when the
+   * banner content changes to re-show the banner to users who previously
+   * dismissed the prior version.
+   */
+  version?: string
 }
