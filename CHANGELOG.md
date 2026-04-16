@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Example site build failure caused by webpackbar 6 overwriting `ProgressPlugin` options; pin the example to `webpackbar@^7.0.0` via npm overrides.
+- Example site `onBrokenLinks: 'throw'` failure by adding a minimal homepage at `src/pages/index.js` so the navbar `/` link resolves.
+
 ## [0.2.0] - 2024-12-11
 
 ### Added
