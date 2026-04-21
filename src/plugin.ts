@@ -86,5 +86,16 @@ export default function bannerPlugin(
     getClientModules() {
       return [require.resolve('./client')]
     },
+
+    injectHtmlTags() {
+      return {
+        headTags: [
+          {
+            tagName: 'script',
+            innerHTML: `window.__DOCUSAURUS_PLUGIN_BANNER__=${JSON.stringify(resolvedOptions)};`,
+          },
+        ],
+      }
+    },
   }
 }

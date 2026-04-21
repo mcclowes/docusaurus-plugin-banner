@@ -19,24 +19,7 @@ function initBanner() {
     existingBanner.remove()
   }
 
-  // Get banner data from global data (Docusaurus v3)
-  // Try accessing via window first, then fallback to generated module if available
-  let bannerData =
-    (window as any).__docusaurus?.globalData?.['docusaurus-plugin-banner']?.default ||
-    (window as any).docusaurus?.globalData?.['docusaurus-plugin-banner']?.default
-
-  // If not found, try to import from generated module (this will work at runtime)
-  if (!bannerData && typeof window !== 'undefined') {
-    try {
-      // Dynamic import of generated globalData - only works after Docusaurus has loaded
-      const globalDataModule = (window as any).__docusaurus_internal?.globalData
-      if (globalDataModule) {
-        bannerData = globalDataModule['docusaurus-plugin-banner']?.default
-      }
-    } catch {
-      // Ignore errors - globalData might not be available yet
-    }
-  }
+  const bannerData = (window as any).__DOCUSAURUS_PLUGIN_BANNER__
 
   if (!bannerData) return
 
