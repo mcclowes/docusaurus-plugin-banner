@@ -46,6 +46,7 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "peerDependencies": {
+    "@docusaurus/core": "^3.0.0",
     "@docusaurus/types": "^3.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"

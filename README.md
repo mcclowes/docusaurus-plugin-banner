@@ -2,6 +2,12 @@
 
 A customizable, dismissable banner plugin for Docusaurus v3 sites with localStorage persistence.
 
+## Compatibility
+
+| Plugin version | Docusaurus                       | React | Node   |
+| -------------- | -------------------------------- | ----- | ------ |
+| `0.4.x`        | `^3.0.0` (tested up to `3.10.1`) | `^18` | `>=20` |
+
 ## Features
 
 - ✅ Fully dismissable banners with X button
