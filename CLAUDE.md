@@ -14,7 +14,7 @@ Guidance for Claude Code when working in this repository.
 ## Stack
 
 - TypeScript, React 18 peer, Docusaurus v3 peer
-- Jest + Testing Library (unit), Playwright (e2e)
+- Vitest + Testing Library (unit), Playwright (e2e)
 - Prettier for formatting
 - Node >=20
 
@@ -23,7 +23,7 @@ Guidance for Claude Code when working in this repository.
 - `npm run build` — tsup build
 - `npm run dev` — tsup watch
 - `npm run typecheck` — `tsc --noEmit`
-- `npm test` / `test:watch` / `test:coverage` — Jest
+- `npm test` / `test:watch` / `test:coverage` — Vitest
 - `npm run test:e2e` — Playwright (requires `npm run example:build` first)
 - `npm run example:start|build|serve` — runs against `examples/docusaurus-v3`
 - `npm run format` / `format:check` — Prettier
