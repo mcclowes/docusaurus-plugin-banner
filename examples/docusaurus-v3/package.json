@@ -12,8 +12,8 @@
   "dependencies": {
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/preset-classic": "^3.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "engines": {
     "node": ">=18.0"
