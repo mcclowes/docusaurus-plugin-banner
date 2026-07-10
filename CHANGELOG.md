@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Banner now renders at runtime by injecting options as a `<script>` in `<head>` instead of relying on `window.globalData`, which isn't exposed to client modules in Docusaurus v3.
+- Example site now builds successfully: pinned `webpackbar` to `^7.0.0` (transitive of `@docusaurus/core`) to avoid a ProgressPlugin schema validation error with recent webpack versions, and added a minimal home page so the default `/` link is no longer broken.
+
 ## [0.2.0] - 2024-12-11
 
 ### Added

@@ -14,16 +14,16 @@ Guidance for Claude Code when working in this repository.
 ## Stack
 
 - TypeScript, React 18 peer, Docusaurus v3 peer
-- Jest + Testing Library (unit), Playwright (e2e)
+- Vitest + Testing Library (unit), Playwright (e2e)
 - Prettier for formatting
-- Node >=18
+- Node >=20
 
 ## Commands
 
 - `npm run build` — tsup build
 - `npm run dev` — tsup watch
 - `npm run typecheck` — `tsc --noEmit`
-- `npm test` / `test:watch` / `test:coverage` — Jest
+- `npm test` / `test:watch` / `test:coverage` — Vitest
 - `npm run test:e2e` — Playwright (requires `npm run example:build` first)
 - `npm run example:start|build|serve` — runs against `examples/docusaurus-v3`
 - `npm run format` / `format:check` — Prettier
@@ -40,6 +40,17 @@ Guidance for Claude Code when working in this repository.
 ## Task tracking
 
 Use GitHub issues for new work. Reference with `Fixes #N` / `Closes #N` in PRs.
+
+## Shared docs site
+
+User-facing changes in this repo should also be reflected in the shared documentation site at `~/Development/docusaurus/docusaurus-plugins-docs/` (separate repo; documents and dogfoods every plugin in this family).
+
+After a change that a consumer can observe — new option, changed default, renamed export, new/removed hook, changed behavior — update both:
+
+- `README.md` here (canonical API reference)
+- `docs/banner/` in `docusaurus-plugins-docs`, at minimum `configuration.md`; also `overview.md` / `getting-started.md` / the relevant `advanced/*.md` when the change reaches those topics
+
+Internal refactors, test-only changes, and build tweaks don't need docs-site updates.
 
 ## Out of scope
 
