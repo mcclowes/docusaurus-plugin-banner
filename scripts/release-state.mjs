@@ -18,12 +18,16 @@ export async function readPublicationState(
     'X-GitHub-Api-Version': '2026-03-10',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
   }
-  const read = async (service, url, { allowMissing = false, headers = {} } = {}) => {
+  const read = async (
+    service,
+    url,
+    { allowMissing = false, expectArray = false, headers = {} } = {}
+  ) => {
     const response = await fetchImpl(url, { headers, signal: AbortSignal.timeout(30000) })
     if (allowMissing && response.status === 404) return null
     if (!response.ok) throw new Error(`${service} check failed: HTTP ${response.status}`)
     const data = await response.json()
-    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    if (!data || typeof data !== 'object' || Array.isArray(data) !== expectArray) {
       throw new Error(`${service} returned invalid metadata`)
     }
     return data
@@ -47,6 +51,12 @@ export async function readPublicationState(
       headers: githubHeaders,
     }),
   ])
+  if (github === null) {
+    await read('GitHub release access', `${repoUrl}/releases?per_page=1`, {
+      expectArray: true,
+      headers: githubHeaders,
+    })
+  }
   if (npm && (npm.name !== name || npm.version !== version)) {
     throw new Error('npm returned an unexpected package version')
   }

@@ -12,12 +12,27 @@ const release = {
 
 const response = (status, body = {}) => new Response(JSON.stringify(body), { status })
 
-test('a fresh version tag still needs both publication channels', async () => {
-  const state = await readPublicationState(release, async (url) =>
-    url.endsWith('/repos/' + release.repository)
-      ? response(200, { full_name: release.repository })
-      : response(404)
+test('visible repository metadata is not enough to infer that a release is missing', async () => {
+  await assert.rejects(
+    readPublicationState(release, async (url) => {
+      if (url.endsWith('/repos/' + release.repository)) {
+        return response(200, { full_name: release.repository })
+      }
+      if (url.endsWith('/releases?per_page=1')) return response(403)
+      return response(404)
+    }),
+    /release access check failed/
   )
+})
+
+test('a fresh version tag still needs both publication channels', async () => {
+  const state = await readPublicationState(release, async (url) => {
+    if (url.endsWith('/repos/' + release.repository)) {
+      return response(200, { full_name: release.repository })
+    }
+    if (url.endsWith('/releases?per_page=1')) return response(200, [])
+    return response(404)
+  })
   assert.deepEqual(state, { npm_published: false, github_published: false, skip: false })
 })
 
@@ -27,6 +42,7 @@ test('a successful response without package metadata cannot trigger publication'
       if (url.endsWith('/repos/' + release.repository)) {
         return response(200, { full_name: release.repository })
       }
+      if (url.endsWith('/releases?per_page=1')) return response(200, [])
       return url.startsWith('https://registry.npmjs.org/') ? response(200, null) : response(404)
     }),
     /invalid|unexpected/
@@ -41,6 +57,7 @@ const services =
     if (url.endsWith('/repos/' + release.repository)) {
       return response(repoStatus, { full_name: release.repository })
     }
+    if (url.endsWith('/releases?per_page=1')) return response(200, [])
     const data = url.startsWith('https://registry.npmjs.org/') ? npm : github
     return response(data === null ? 404 : 200, data)
   }
@@ -154,9 +171,11 @@ test('GitHub credentials are sent only to GitHub and scoped package paths are en
     { ...release, name: '@example/banner', token: 'test-token' },
     async (url, options) => {
       requests.push({ url, headers: options.headers })
-      return url.endsWith('/repos/' + release.repository)
-        ? response(200, { full_name: release.repository })
-        : response(404)
+      if (url.endsWith('/repos/' + release.repository)) {
+        return response(200, { full_name: release.repository })
+      }
+      if (url.endsWith('/releases?per_page=1')) return response(200, [])
+      return response(404)
     }
   )
   const npm = requests.find(({ url }) => url.startsWith('https://registry.npmjs.org/'))
