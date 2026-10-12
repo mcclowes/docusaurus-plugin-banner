@@ -23,6 +23,7 @@ export default {
       ({
         docs: {
           sidebarPath: path.resolve(__dirname, './sidebars.js'),
+          routeBasePath: '/',
         },
         blog: false,
         theme: {
@@ -51,7 +52,7 @@ export default {
     ({
       navbar: {
         title: 'Banner Example',
-        items: [{ to: '/docs/intro', label: 'Docs', position: 'left' }],
+        items: [{ to: '/', label: 'Docs', position: 'left' }],
       },
     }),
 }
