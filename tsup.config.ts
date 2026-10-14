@@ -9,7 +9,12 @@ export default defineConfig({
   format: ['cjs', 'esm'],
   sourcemap: true,
   clean: true,
+  shims: true,
   target: 'es2019',
+  esbuildOptions(options) {
+    // Node supports import.meta; keep the browser bundle's existing language target.
+    options.supported = { ...options.supported, 'import-meta': true }
+  },
   external: [
     'react',
     'react-dom',

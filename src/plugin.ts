@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import type { LoadContext, Plugin } from '@docusaurus/types'
 import type { BannerPluginOptions } from './types'
 
@@ -84,7 +85,7 @@ export default function bannerPlugin(
     },
 
     getClientModules() {
-      return [require.resolve('./client')]
+      return [fileURLToPath(new URL('./client', import.meta.url))]
     },
   }
 }

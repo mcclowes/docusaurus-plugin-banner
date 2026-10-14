@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { describe, it, expect, vi } from 'vitest'
 import bannerPlugin from '../src/plugin'
 import type { LoadContext } from '@docusaurus/types'
@@ -127,16 +128,9 @@ describe('bannerPlugin', () => {
   describe('getClientModules', () => {
     it('should return an array with client module path', () => {
       const plugin = bannerPlugin(mockContext, { content: 'Test banner' })
-      // require.resolve('./client') resolves relative to src/plugin.ts — only
-      // succeeds when dist/client has been built. Skip the assertion if not built.
-      try {
-        const clientModules = plugin.getClientModules!()
-        expect(Array.isArray(clientModules)).toBe(true)
-        expect(clientModules.length).toBe(1)
-        expect(clientModules[0]).toContain('client')
-      } catch (err) {
-        expect((err as Error).message).toContain('client')
-      }
+      expect(plugin.getClientModules!()).toEqual([
+        fileURLToPath(new URL('../src/client', import.meta.url)),
+      ])
     })
   })
 })
