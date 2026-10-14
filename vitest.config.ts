@@ -13,12 +13,25 @@ export default defineConfig({
     },
   },
   test: {
-    include: ['tests/**/*.test.{ts,tsx}'],
-    environmentMatchGlobs: [
-      ['tests/**/*.test.tsx', 'jsdom'],
-      ['tests/**/*.test.ts', 'node'],
-    ],
     setupFiles: ['./tests/setup.ts'],
     css: { modules: { classNameStrategy: 'non-scoped' } },
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          include: ['tests/**/*.test.ts'],
+          environment: 'node',
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'client',
+          include: ['tests/**/*.test.tsx'],
+          environment: 'jsdom',
+        },
+      },
+    ],
   },
 })
