@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Forward Docusaurus options through the root example helpers, including custom ports and paths with spaces.
 - Match ESM package exports to emitted JavaScript and resolve client modules from both ESM and CommonJS servers.
 - Restore jsdom for component tests after the Vitest 4 upgrade, while keeping plugin tests in Node.
 

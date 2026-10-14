@@ -220,7 +220,7 @@ npm run test:e2e
 npm run test:e2e:ui
 ```
 
-### Example Site
+### Example site
 
 ```bash
 # Start example site in development mode
@@ -232,6 +232,10 @@ npm run example:build
 # Serve built example site
 npm run example:serve
 ```
+
+Forward Docusaurus options after `--`, for example
+`npm run example:serve -- --port 4100`. The root helpers preserve those options
+through the example's npm scripts.
 
 ### Code Formatting
 
