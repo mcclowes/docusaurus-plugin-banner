@@ -8,3 +8,4 @@ examples/**/.docusaurus/
 examples/**/build/
 *.tgz
 package-lock.json
+.claude/
